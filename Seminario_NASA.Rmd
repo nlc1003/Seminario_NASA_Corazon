@@ -1,0 +1,50 @@
+---
+title: "Impacto del estrés térmico ambiental en la incidencia cardiovascular aguda: Un análisis basado en telemetría satelital"
+author: "Alex, Aurora y Nayara"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    theme: flatly
+---
+<style> body { text-align: justify} </style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+```{r}
+if (!require("nasapower")) install.packages("nasapower")
+if (!require("tidyverse")) install.packages("tidyverse")
+if (!require("DT")) install.packages("DT")
+
+library(nasapower)
+library(tidyverse)
+library(DT)
+```
+```{r}
+# 1. Conectamos con el satélite
+datos_clima <- get_power(
+  community = "ag",
+  pars = c("T2M"),
+  lonlat = c(-3.69, 42.34),
+  dates = c("2023-01-01", "2023-12-31"),
+  temporal_api = "daily"
+)
+
+# 2. Calculamos el Choque Térmico
+datos_choque <- datos_clima %>%
+  select(YEAR, MM, DD, T2M) %>%
+  mutate(
+    Fecha = make_date(YEAR, MM, DD),
+    Temp_Ayer = lag(T2M),             
+    Choque_Termico = T2M - Temp_Ayer  
+  ) %>%
+  filter(!is.na(Choque_Termico)) 
+
+# 3. Visualizamos la tabla
+datatable(datos_choque)
+```
+
+
