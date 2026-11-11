@@ -27,7 +27,9 @@ library(dplyr)
 library(jsonlite)  
 library(lunar)     
 
-datos_ine <- read_delim("INPUT/DATA/79517.csv", delim = ";")
+datos_ine <- read_delim("INPUT/DATA/79517.csv", 
+                        delim = ";", 
+                        locale = locale(encoding = "ISO-8859-1"))
 ```
 ```{r}
 # 1. Conectamos con el satélite
