@@ -22,6 +22,12 @@ if (!require("DT")) install.packages("DT")
 library(nasapower)
 library(tidyverse)
 library(DT)
+library(readr)     
+library(dplyr)     
+library(jsonlite)  
+library(lunar)     
+
+datos_ine <- read_delim("INPUT/DATA/79517.csv", delim = ";")
 ```
 ```{r}
 # 1. Conectamos con el satélite
