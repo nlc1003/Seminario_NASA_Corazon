@@ -1,6 +1,6 @@
 ---
 title: "Impacto del estrés térmico ambiental en la incidencia cardiovascular aguda: Un análisis basado en telemetría satelital"
-author: "Alex, Aurora y Nayara"
+author: "Alex Sanz, Aurora Real y Nayara López de Armentia "
 date: "`r Sys.Date()`"
 output: 
   html_document:
