@@ -27,9 +27,13 @@ library(dplyr)
 library(jsonlite)  
 library(lunar)     
 
-datos_ine <- read_delim("INPUT/DATA/79517.csv", 
+datos_ine <- read_delim("INPUT/DATA/infartos_españa.csv", 
                         delim = ";", 
                         locale = locale(encoding = "ISO-8859-1"))
+infartos_limpio <- datos_ine %>%
+  filter(Provincias %in% c("09 Burgos", "28 Madrid", "41 Sevilla", "35 Palmas, Las", "15 Coruña, A"))
+
+table(infartos_limpio$Provincias)
 ```
 ```{r}
 # 1. Conectamos con el satélite
